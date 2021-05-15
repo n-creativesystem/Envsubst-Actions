@@ -1,9 +1,14 @@
 name: Build Docker Image
 
-on: [push]
+on:
+  push:
+    branches:
+      - "*"
+    paths-ignore:
+      - "action.yaml"
+      - "README.md"
 
 jobs:
-
   build:
     name: Build Docker Image
     runs-on: ubuntu-latest
