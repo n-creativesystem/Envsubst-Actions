@@ -1,0 +1,20 @@
+{
+    "name": "github-actions-dev",
+    "dockerComposeFile": [
+        "../docker-compose.yaml"
+    ],
+    "service": "github-actions-dev",
+    "workspaceFolder": "/src/",
+    "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash",
+    },
+    "extensions": [
+        "streetsidesoftware.code-spell-checker",
+        "eamodio.gitlens",
+        "mhutchie.git-graph",
+        "yzhang.markdown-all-in-one"
+    ],
+    "forwardPorts": [
+        8080
+    ]
+}

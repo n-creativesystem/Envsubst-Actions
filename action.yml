@@ -1,0 +1,16 @@
+name: "envsubst action"
+description: "envsubstを使用して環境変数の値を代入します"
+author: "nozomi_nishinohara@n-creativesystem.com"
+inputs:
+  input:
+    description: "テンプレートファイル名"
+    required: true
+  output:
+    description: "出力ファイル名"
+    required: true
+  tag_name:
+    description: 'github.refを設定 sed -e "s#refs/tags/##g"でパースし、VERSION環境変数へ設定する'
+    required: false
+runs:
+  using: "docker"
+  image: "Dockerfile"

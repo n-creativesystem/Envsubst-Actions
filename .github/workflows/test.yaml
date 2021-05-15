@@ -1,0 +1,37 @@
+name: Test
+
+on: [pull_request]
+
+env:
+  test: test-env
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: version
+        id: version
+        run: |
+          export VERSION=$(echo ${{ github.ref }} | sed -e "s#refs/tags/##g")
+          echo "::set-output name=VERSION::$VERSION"
+
+      - name: step check
+        run: |
+          set -ex
+          echo ${{ steps.version.outputs.VERSION }}
+
+      - name: Run envsubst
+        uses: ./
+        with:
+          input: ./tests/text-tpl.txt
+          output: ./tests/text.txt
+        env:
+          VERSION: ${{ steps.version.outputs.VERSION }}
+          NAME: world
+      - name: Print output
+        run: cat ./tests/text.txt
+      - name: Test
+        run: '[[ "$(cat ./tests/text.txt)" = "Hello, world" ]]'
